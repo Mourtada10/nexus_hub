@@ -16,6 +16,7 @@ $motDePasse = "";
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $role = $_POST["role"];
     $motDePasse = $_POST["password"];
+    $age = $_POST["age"];
 
     if ($motDePasse == "secret123") {
         echo "Mot de passe correct <br>";
@@ -51,11 +52,14 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 <body>
     <form method="POST" action="">
         <label for="role">Ton rôle :</label>
-        <input type="text" name="role" required>
+        <input type="text" name="role">
         <br>
-        <label for="password">Ton mot de passe :</label>
-        <input type="password" name="password" required>
+        <label for="password">Ton mot de passe :</label><br>
+        <input type="password" name="password">
         <br>
+        <label for="age">Ton age :</label><br>
+        <input type="number" name = "age">
+        <br><br>
         <button type="submit">Envoyez</button>
     </form>
 </body>
