@@ -8,7 +8,7 @@ $ageMinimum = 18;
 
 function afficherBadge($nom, $statut)
 {
-    echo "Badge généré : $nom - Statut : $statut<br>";
+    echo "Badge généré : $nom - Statut : $statut" . "<br>";
 }
 
 if (isset($_POST["prenom"])) {
@@ -38,20 +38,20 @@ if (isset($_POST["prenom"])) {
 
 <body>
     <form action="evaluation_finale.php" method="POST">
-        <label>Prénom</label>
+        <label>Prénom</label><br>
         <input type="text" name="prenom" placeholder="Votre prénom"><br>
-
-        <label>Âge</label>
+         <br>
+        <label>Âge</label><br>
         <input type="number" name="age" placeholder="Votre âge"><br>
-
-        <label>Mot de passe</label>
+         <br>
+        <label>Mot de passe</label><br>
         <input type="password" name="code"><br>
-
-        <label>Statut</label>
+        <br>
+        <label>Statut</label><br>
         <select name="statut">
             <option value="Stagiaire">Stagiaire</option>
             <option value="Employé">Employé</option>
-        </select><br>
+        </select><br><br>
 
         <button type="submit">Ajouter au répertoire</button>
     </form>
@@ -63,12 +63,12 @@ if (isset($_POST["prenom"])) {
     }
 
     for ($i = 0; $i < 3; $i++) {
-        echo "Emplacement bureau vide disponible...<br>";
+        echo "Emplacement bureau vide disponible..." . "<br>";
     }
 
     $chargement = 0;
     while ($chargement < 2) {
-        echo "Synchronisation de la base de données...<br>";
+        echo "Synchronisation de la base de données..." . "<br>";
         $chargement++;
     }
     ?>
