@@ -19,13 +19,16 @@ if (!$conn) {
     if (!$result) {
         echo "Erreur : impossible de récupérer les contacts !";
     } else {
-        // Vérifie s'il y a des contacts
-        if (pg_num_rows($result) == 0) {
+        // On récupère tous les résultats dans un tableau
+        $contacts = pg_fetch_all($result);
+
+        if (!$contacts) {
             echo "<li>Aucun contact trouvé.</li>";
         } else {
             echo "<h2>Liste des contacts :</h2>";
             echo "<ul>";
-            while ($contact = pg_fetch_assoc($result)) {
+            // 4️⃣ Boucle foreach pour afficher chaque contact
+            foreach ($contacts as $contact) {
                 echo "<li>Nom : " . htmlspecialchars($contact['nom']) .
                     " - Numéro : " . htmlspecialchars($contact['numero']) . "</li>";
             }
@@ -33,6 +36,6 @@ if (!$conn) {
         }
     }
 
-    // 4️⃣ FERMER LA CONNEXION
+    // 5️⃣ FERMER LA CONNEXION
     pg_close($conn);
 }
