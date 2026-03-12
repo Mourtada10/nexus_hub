@@ -1,1 +1,125 @@
-    
+body {
+    font-family: 'Segoe UI', Roboto, sans-serif;
+    background-color: #f0f2f5;
+    margin: 0;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+/* Titre au milieu */
+h1 {
+    color: #1a73e8;
+    text-align: center;
+    margin-bottom: 30px;
+    font-size: 2.2rem;
+    font-weight: 700;
+}
+
+/* Container principal pour limiter la largeur */
+.container {
+    width: 90%;
+    max-width: 1100px;
+}
+
+/* Barre de recherche alignée horizontalement */
+form {
+    background: white;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 20px;
+}
+
+input[type="text"] {
+    padding: 12px 20px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    width: 300px;
+    font-size: 14px;
+    outline: none;
+    transition: border 0.3s;
+}
+
+input[type="text"]:focus {
+    border-color: #1a73e8;
+}
+
+button {
+    background-color: #1a73e8;
+    color: white;
+    border: none;
+    padding: 12px 25px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-weight: 600;
+    transition: background 0.3s;
+}
+
+button:hover {
+    background-color: #1557b0;
+}
+
+/* Lien Ajouter un collaborateur */
+a {
+    display: inline-block;
+    text-decoration: none;
+    color: #1a73e8;
+    font-weight: 600;
+    margin-bottom: 15px;
+    transition: color 0.3s;
+}
+
+a:hover {
+    color: #1557b0;
+    text-decoration: underline;
+}
+
+/* Style du tableau */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    background: white;
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+}
+
+th {
+    background-color: #1a73e8;
+    color: white;
+    text-align: left;
+    padding: 18px;
+    text-transform: uppercase;
+    font-size: 13px;
+    letter-spacing: 1px;
+}
+
+td {
+    padding: 15px 18px;
+    border-bottom: 1px solid #eee;
+    color: #444;
+}
+
+tr:last-child td {
+    border-bottom: none;
+}
+
+tr:hover {
+    background-color: #f8f9fa;
+}
+
+/* Lien Supprimer */
+td a {
+    color: #d93025;
+    margin-bottom: 0;
+}
+
+td a:hover {
+    color: #a50e0e;
+}
