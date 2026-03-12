@@ -1,90 +1,38 @@
 <?php
-
-// 1️⃣ Connexion à la base de données
-
+// 1️⃣ CONFIGURATION DE LA BASE DE DONNÉES
 $host = "localhost";
 $port = "5432";
 $dbname = "postgres";
 $user = "postgres";
 $password = "Tada2004$";
 
-try {
+// 2️⃣ CONNEXION À LA BASE DE DONNÉES
+$conn = pg_connect("host=$host port=$port dbname=$dbname user=$user password=$password");
 
-    $dsn = "pgsql:host=$host;port=$port;dbname=$dbname";
-    $db = new PDO($dsn, $user, $password);
-} catch (PDOException $e) {
+if (!$conn) {
+    echo "Erreur : impossible de se connecter à la base de données !";
+} else {
+    // 3️⃣ RÉCUPÉRER TOUS LES CONTACTS
+    $query = "SELECT * FROM contacts";
+    $result = pg_query($conn, $query);
 
-    echo "Erreur : " . $e->getMessage();
-}
-
-
-// 2️⃣ Classe Contact
-
-class Contact
-{
-
-    public $id;
-    public $nom;
-    public $numero;
-}
-
-
-// 3️⃣ Classe ContactManager
-
-class ContactManager
-{
-
-    public $db;
-
-    public function __construct($db)
-    {
-        $this->db = $db;
-    }
-
-    public function getAllContacts()
-    {
-
-        $sql = "SELECT * FROM contacts";
-        $stmt = $this->db->query($sql);
-
-        $contacts = [];
-
-        while ($row = $stmt->fetch()) {
-
-            $contact = new Contact();
-
-            $contact->id = $row['id'];
-            $contact->nom = $row['nom'];
-            $contact->numero = $row['numero'];
-
-            $contacts[] = $contact;
+    if (!$result) {
+        echo "Erreur : impossible de récupérer les contacts !";
+    } else {
+        // Vérifie s'il y a des contacts
+        if (pg_num_rows($result) == 0) {
+            echo "<li>Aucun contact trouvé.</li>";
+        } else {
+            echo "<h2>Liste des contacts :</h2>";
+            echo "<ul>";
+            while ($contact = pg_fetch_assoc($result)) {
+                echo "<li>Nom : " . htmlspecialchars($contact['nom']) .
+                    " - Numéro : " . htmlspecialchars($contact['numero']) . "</li>";
+            }
+            echo "</ul>";
         }
-
-        return $contacts;
     }
+
+    // 4️⃣ FERMER LA CONNEXION
+    pg_close($conn);
 }
-
-
-// 4️⃣ Utiliser le manager
-
-$manager = new ContactManager($db);
-
-$contacts = $manager->getAllContacts();
-
-?>
-
-<!-- 5️⃣ Affichage HTML -->
-
-<h2>Liste des contacts</h2>
-
-<ul>
-
-    <?php foreach ($contacts as $contact) { ?>
-
-        <li>
-            <?php echo $contact->nom ?> - <?php echo $contact->numero ?>
-        </li>
-
-    <?php } ?>
-
-</ul>
